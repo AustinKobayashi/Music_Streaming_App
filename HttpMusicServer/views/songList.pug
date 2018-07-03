@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    h1= title
+
+    ul
+    each song in song_list
+        li
+            a(href='/' + song.url) #{song.name}
+    else
+        li There are no songs.

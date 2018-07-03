@@ -10,6 +10,10 @@ var catalogRouter = require('./routes/catalog');
 
 var app = express();
 
+var connection = require('./routes/database');
+
+connection.connect();
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -20,9 +24,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/', catalogRouter);
 app.use('/users', usersRouter);
-app.use('/catalog', catalogRouter);
+//app.use('/catalog', catalogRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

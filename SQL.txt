@@ -1,0 +1,72 @@
+CREATE TABLE `genre` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` char(100) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+
+
+CREATE TABLE `artist` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` char(100) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+
+
+CREATE TABLE `album` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` char(100) NOT NULL DEFAULT '',
+  `artist_id` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `artist_fk` (`artist_id`),
+  CONSTRAINT `artist_fk` FOREIGN KEY (`artist_id`) REFERENCES `artist` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+
+
+CREATE TABLE `song` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` char(100) NOT NULL DEFAULT '',
+  `url` char(200) NOT NULL,
+  `genre_id` int(11) unsigned NOT NULL,
+  `artist_id` int(11) unsigned NOT NULL,
+  `album_id` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `genre_fk` (`genre_id`),
+  KEY `album_fk` (`album_id`),
+  KEY `artist_id` (`artist_id`),
+  CONSTRAINT `album_fk` FOREIGN KEY (`album_id`) REFERENCES `album` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `artist_id` FOREIGN KEY (`artist_id`) REFERENCES `artist` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `genre_fk` FOREIGN KEY (`genre_id`) REFERENCES `genre` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+
+
+INSERT INTO `genre` (`id`, `name`)
+VALUES
+	(1, 'Hip Hop');
+
+
+
+
+INSERT INTO `artist` (`id`, `name`)
+VALUES
+	(1, 'Calvin Harris');
+
+
+
+INSERT INTO `album` (`id`, `name`, `artist_id`)
+VALUES
+	(1, 'Single', 1);
+
+
+
+
+INSERT INTO `song` (`id`, `name`, `url`, `genre_id`, `artist_id`, `album_id`)
+VALUES
+	(1, 'Heatstroke', 'testmusic.mp3', 1, 1, 1);
+
+
+
+
