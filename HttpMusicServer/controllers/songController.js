@@ -12,5 +12,9 @@ exports.song_list = function(req, res){
 
 exports.song_detail = function(req, res){
 
-    res.send('Not Implemented: Song Detail: ' + req.params.id);
+    connection.query('select * from song where id = ' + req.params.id, function (error, results, fields) {
+        console.log(results);
+        res.redirect('../' + results[0].url);
+        //res.render('songList', {title: 'Songs', song_list: results});
+    });
 };

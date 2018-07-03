@@ -63,7 +63,7 @@ public class Client extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("MuSiC!");
         final Pane root = new Pane();
 
         VBox vbox = new VBox(10);
@@ -116,6 +116,7 @@ public class Client extends Application {
         vbox.getChildren().add(genre_btn);
 
         root.getChildren().add(vbox);
+
         //root.getChildren().add(btn);
         primaryStage.setScene(new Scene(root, 300, 250));
         primaryStage.show();
@@ -240,8 +241,7 @@ public class Client extends Application {
         mediaBar.getChildren().add(volumeSlider);
 
 
-        mediaPlayer.currentTimeProperty().addListener(new InvalidationListener()
-        {
+        mediaPlayer.currentTimeProperty().addListener(new InvalidationListener() {
             public void invalidated(Observable ov) {
                 updateValues();
             }
@@ -417,26 +417,4 @@ public class Client extends Application {
             }
         }
     }
-
-    /*
-    void PlayMedia(){
-
-        Media media = new Media(MEDIA_URL);
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setAutoPlay(true);
-
-        MediaView mediaView = new MediaView(mediaPlayer);
-
-        Group root = new Group(mediaView);
-        Scene scene = new Scene(root, 500, 200);
-
-        // Show the stage
-        primaryStage.setTitle("Media Player");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
-        // Play the media once the stage is shown
-        mediaPlayer.play();
-    }
-*/
 }
