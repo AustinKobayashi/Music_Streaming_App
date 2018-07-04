@@ -80,7 +80,7 @@ public class Client extends Application {
 
 
         Button albums_btn = new Button();
-        albums_btn.setText("Artists");
+        albums_btn.setText("Albums");
         albums_btn.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override

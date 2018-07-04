@@ -1,17 +1,38 @@
 package sample;
 
+import javafx.animation.Interpolator;
+import javafx.animation.PathTransition;
+import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.*;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
+
+import static java.lang.Math.abs;
 
 public class Controller {
 
     @FXML
-    private Text text1;
+    public Pane topBar;
 
     @FXML
-    private Text text2;
+    private Pane centerPane;
+    @FXML
+    private ScrollPane playlistScrollPane;
+    @FXML
+    private AnchorPane playlistAnchorPane;
+
+    @FXML
+    private Pane bottomBar;
+
+    @FXML
+    private Pane artistDetails;
 
     private double orgSceneX;
     private double orgTranslateX;
@@ -23,17 +44,17 @@ public class Controller {
 
 
     @FXML
-    private void click(MouseEvent t){
+    private void SwipeClick(MouseEvent t){
         orgSceneX = t.getSceneX();
-        orgTranslateX = ((Pane)(t.getSource())).getTranslateX();
+        orgTranslateX = centerPane.getTranslateX();
 
+        System.out.println(centerPane.getBoundsInLocal().getMinY());
         //System.out.println("orgSceneX " + orgSceneX);
         //System.out.println("orgTranslateX " + orgTranslateX);
-
     }
 
     @FXML
-    private void drag(MouseEvent t){
+    private void SwipeDrag(MouseEvent t){
         double offsetX = t.getSceneX() - orgSceneX;
         double newTranslateX = orgTranslateX + offsetX;
 
@@ -41,37 +62,43 @@ public class Controller {
         //System.out.println("newTranslateX " + newTranslateX);
 
         if(newTranslateX < 0)
-            ((Pane)(t.getSource())).setTranslateX(newTranslateX);
+            centerPane.setTranslateX(newTranslateX);
     }
 
 
     @FXML
-    private void release(MouseEvent t){
+    private void SwipeRelease(MouseEvent t){
 
         double offsetX = t.getSceneX() - orgSceneX;
         double newTranslateX = orgTranslateX + offsetX;
 
-        //System.out.println("offsetX " + offsetX);
-        //System.out.println("newTranslateX " + newTranslateX);
+        System.out.println("offsetX " + offsetX);
+        System.out.println("newTranslateX " + newTranslateX);
 
-        if(newTranslateX > -450/2) {
-            // float inc = (450/2) / 0.5f;
-            while(newTranslateX < 0){
-                newTranslateX += 0.000001f;
-                    //System.out.println(newTranslateX);
-                ((Pane) (t.getSource())).setTranslateX(newTranslateX);
-            }
-            ((Pane) (t.getSource())).setTranslateX(0);
+        if(abs(offsetX) <= 1)
+            return;
+
+        if(newTranslateX >= -450/2) {
+
+            MoveAlongPath(newTranslateX, 0);
+            centerPane.setTranslateX(0);
 
         } else if(newTranslateX < -450/2){
 
-            while(newTranslateX > -450){
-                newTranslateX -= 0.0001f;
-                //System.out.println(newTranslateX);
-                ((Pane) (t.getSource())).setTranslateX(newTranslateX);
-            }
-
-            ((Pane)(t.getSource())).setTranslateX(-450);
+            MoveAlongPath(newTranslateX, -450);
+            centerPane.setTranslateX(-450);
         }
+    }
+
+
+
+    private void MoveAlongPath(double fromX, double toX){
+
+        TranslateTransition translateTransition =  new TranslateTransition();
+        translateTransition.setNode(centerPane);
+        translateTransition.setDuration(Duration.millis(100));
+        translateTransition.setFromX(fromX);
+        translateTransition.setToX(toX);
+        translateTransition.play();
     }
 }
