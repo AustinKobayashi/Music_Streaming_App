@@ -42,30 +42,46 @@ CREATE TABLE `song` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 
-
 INSERT INTO `genre` (`id`, `name`)
 VALUES
-	(1, 'Hip Hop');
-
-
+	(1, 'Hip Hop'),
+	(2, 'Jazz'),
+	(3, 'Contemporary R&B');
 
 
 INSERT INTO `artist` (`id`, `name`)
 VALUES
-	(1, 'Calvin Harris');
-
+	(1, 'Calvin Harris'),
+	(2, 'Frank Sinatra'),
+	(3, 'Kendrick Lamar');
 
 
 INSERT INTO `album` (`id`, `name`, `artist_id`)
 VALUES
-	(1, 'Single', 1);
-
-
+	(1, 'Calvin Harris - Singles', 1),
+	(2, 'Calvin Harris 1', 1),
+	(3, 'Calvin Harris 2', 1),
+	(4, 'Frank Sinatra - Singles', 2),
+	(5, 'Black Panther', 3);
 
 
 INSERT INTO `song` (`id`, `name`, `url`, `genre_id`, `artist_id`, `album_id`)
 VALUES
-	(1, 'Heatstroke', 'testmusic.mp3', 1, 1, 1);
+	(1, 'Heatstroke', 'heatstroke.mp3', 1, 1, 1),
+	(2, 'Fly Me To The Moon', 'flymetothemoon.mp3', 2, 2, 4),
+	(3, 'All The Stars', 'allthestars.mp3', 3, 3, 5);
+
+
+============================
+To reset database
+============================
+DROP table song;
+
+DROP table genre;
+
+DROP table album;
+
+DROP table artist;
 
 
 

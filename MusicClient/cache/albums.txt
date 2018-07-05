@@ -1,0 +1,1 @@
+[{"id":1,"name":"Calvin Harris - Singles","artist_id":1},{"id":2,"name":"Calvin Harris 1","artist_id":1},{"id":3,"name":"Calvin Harris 2","artist_id":1},{"id":4,"name":"Frank Sinatra - Singles","artist_id":2},{"id":5,"name":"Black Panther","artist_id":3}]

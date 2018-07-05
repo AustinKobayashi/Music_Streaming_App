@@ -63,7 +63,7 @@
             </ScrollPane>
          </children>
       </Pane>
-      <Pane fx:id="bottomBar" layoutY="696.0" prefHeight="104.0" prefWidth="450.0" style="-fx-background-color: #e6e6e6;">
+      <Pane id="bottomBar" fx:id="bottomBar" layoutY="696.0" prefHeight="104.0" prefWidth="450.0" style="-fx-background-color: #e6e6e6;">
          <children>
             <Button ellipsisString="" layoutX="181.25" layoutY="10.25" maxHeight="87.5" maxWidth="87.5" minHeight="87.5" minWidth="87.5" mnemonicParsing="false" style="-fx-background-radius: 5em; -fx-background-image: url('&quot;PlayButton.png&quot;');">
                <effect>
@@ -103,6 +103,20 @@
             <DropShadow />
          </effect>
       </Pane>
-      <Pane id="artistDetails" fx:id="artistDetails" layoutX="450.0" prefHeight="696.0" prefWidth="450.0" style="-fx-background-color: white;" />
+      <Pane id="artistDetails" fx:id="artistDetails" layoutX="450.0" prefHeight="696.0" prefWidth="450.0" style="-fx-background-color: white;">
+         <children>
+            <Button layoutX="25.0" layoutY="25.0" mnemonicParsing="false" onAction="#ArtistDetailsBackButton" text="Back" />
+            <ScrollPane hbarPolicy="NEVER" layoutY="125.0" prefHeight="571.0" prefWidth="450.0" vbarPolicy="NEVER">
+              <content>
+                <AnchorPane id="artistDetailsAnchorPage" minHeight="0.0" minWidth="0.0" prefHeight="571.0" prefWidth="450.0" />
+              </content>
+            </ScrollPane>
+         </children></Pane>
+      <Pane id="albumDetails" fx:id="albumDetails" layoutX="450.0" prefHeight="696.0" prefWidth="450.0" style="-fx-background-color: white;">
+         <children>
+            <Button layoutX="25.0" layoutY="25.0" mnemonicParsing="false" onAction="#AlbumDetailsBackButton" text="Back" />
+            <VBox id="albumDetailsVbox" layoutY="125.0" prefHeight="696.0" prefWidth="450.0" />
+         </children>
+      </Pane>
    </children>
 </Pane>

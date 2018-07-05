@@ -5,6 +5,7 @@ import javafx.animation.PathTransition;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -33,6 +34,10 @@ public class Controller {
 
     @FXML
     private Pane artistDetails;
+
+    @FXML
+    private Pane albumDetails;
+
 
     private double orgSceneX;
     private double orgTranslateX;
@@ -80,22 +85,37 @@ public class Controller {
 
         if(newTranslateX >= -450/2) {
 
-            MoveAlongPath(newTranslateX, 0);
+            MoveAlongPath(centerPane, newTranslateX, 0);
             centerPane.setTranslateX(0);
 
         } else if(newTranslateX < -450/2){
 
-            MoveAlongPath(newTranslateX, -450);
+            MoveAlongPath(centerPane, newTranslateX, -450);
             centerPane.setTranslateX(-450);
         }
     }
 
 
+    @FXML
+    private void ArtistDetailsBackButton(){
 
-    private void MoveAlongPath(double fromX, double toX){
+        MoveAlongPath(artistDetails, 0, 450);
+    }
+
+
+
+    @FXML
+    private void AlbumDetailsBackButton(){
+
+        MoveAlongPath(albumDetails, 0, 450);
+    }
+
+
+
+    private void MoveAlongPath(Node node, double fromX, double toX){
 
         TranslateTransition translateTransition =  new TranslateTransition();
-        translateTransition.setNode(centerPane);
+        translateTransition.setNode(node);
         translateTransition.setDuration(Duration.millis(100));
         translateTransition.setFromX(fromX);
         translateTransition.setToX(toX);
