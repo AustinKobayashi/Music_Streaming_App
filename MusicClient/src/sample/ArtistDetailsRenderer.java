@@ -63,11 +63,12 @@ public class ArtistDetailsRenderer {
             GridPane.setValignment(btn1, VPos.CENTER);
             btn1.setMinSize(width * 0.8, height * 0.8);
 
-            int finalAlbumId = i + 1;
+            int finalAlbumId = i;
             btn1.setOnAction(event -> {
                 Node albumDetails = scene.lookup("#albumDetails");
                 try {
-                    AlbumDetailsRenderer.getInstance().RenderAlbumDetails(scene, finalAlbumId);
+                    AlbumDetailsRenderer.getInstance().RenderAlbumDetails(scene,
+                            artistAlbums.getJSONObject(finalAlbumId).getInt("id"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

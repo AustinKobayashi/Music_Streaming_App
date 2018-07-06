@@ -60,6 +60,7 @@ public class ArtistListRenderer {
             btn1.setOnAction(event -> {
                 Node artistDetails = scene.lookup("#artistDetails");
                 try {
+                    System.out.println(artistId);
                     ArtistDetailsRenderer.getInstance().RenderArtistDetails(scene, artistId);
                 } catch (JSONException e) {
                     e.printStackTrace();

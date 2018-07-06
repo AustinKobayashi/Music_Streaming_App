@@ -53,7 +53,7 @@ public class Controller {
         orgSceneX = t.getSceneX();
         orgTranslateX = centerPane.getTranslateX();
 
-        System.out.println(centerPane.getBoundsInLocal().getMinY());
+        //System.out.println(centerPane.getBoundsInLocal().getMinY());
         //System.out.println("orgSceneX " + orgSceneX);
         //System.out.println("orgTranslateX " + orgTranslateX);
     }
@@ -77,9 +77,9 @@ public class Controller {
         double offsetX = t.getSceneX() - orgSceneX;
         double newTranslateX = orgTranslateX + offsetX;
 
-        System.out.println("offsetX " + offsetX);
-        System.out.println("newTranslateX " + newTranslateX);
-        System.out.println("position " + centerPane.getTranslateX());
+        //System.out.println("offsetX " + offsetX);
+        //System.out.println("newTranslateX " + newTranslateX);
+        //System.out.println("position " + centerPane.getTranslateX());
 
         if(abs(offsetX) <= 1)
             return;
