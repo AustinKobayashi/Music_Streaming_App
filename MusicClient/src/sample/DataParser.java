@@ -1,6 +1,7 @@
 package sample;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -17,9 +18,14 @@ public class DataParser {
     public HashMap<Integer, JSONObject> songs = new HashMap<>();
     public HashMap<Integer, JSONObject> genres = new HashMap<>();
 
-    public DataParser(){}
+    private static DataParser instance = new DataParser();
 
-    public void ParseData(){
+    private DataParser(){}
+
+    public static DataParser getInstance(){ return instance; }
+
+
+    public void ParseData() throws JSONException {
 
         String artists_string = ParseCache("artists");
         assert artists_string != null;
@@ -56,8 +62,9 @@ public class DataParser {
 
         try{
 
-            File text_file = new File("cache\\" + url + ".txt");
-            List<String> data_list = Files.readAllLines(Paths.get("cache\\" + url + ".txt"));
+            //File text_file = new File("cache\\" + url + ".txt");
+
+            List<String> data_list = Files.readAllLines(Paths.get("cache/" + url + ".txt"));
 
             return data_list.get(0);
 
@@ -70,7 +77,7 @@ public class DataParser {
 
 
 
-    public JSONArray GetAllArtistAlbums(int artistId){
+    public JSONArray GetAllArtistAlbums(int artistId) throws JSONException {
 
         JSONArray allArtistAlbums = new JSONArray();
 
@@ -84,7 +91,7 @@ public class DataParser {
     
     
 
-    public JSONArray GetAllAlbumSongs(int albumId){
+    public JSONArray GetAllAlbumSongs(int albumId) throws JSONException {
 
         JSONArray allAlbumSongs = new JSONArray();
 

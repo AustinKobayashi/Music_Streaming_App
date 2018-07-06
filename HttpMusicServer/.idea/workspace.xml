@@ -17,7 +17,7 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
+            <state relative-caret-position="105">
               <caret line="7" column="14" selection-start-line="7" selection-end-line="8" />
             </state>
           </provider>
@@ -26,7 +26,7 @@
       <file leaf-file-name="genreController.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/genreController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
+            <state relative-caret-position="360">
               <caret line="24" column="42" selection-start-line="24" selection-start-column="42" selection-end-line="24" selection-end-column="42" />
             </state>
           </provider>
@@ -35,8 +35,8 @@
       <file leaf-file-name="songController.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/controllers/songController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="106" selection-start-line="14" selection-start-column="106" selection-end-line="14" selection-end-column="106" />
+            <state relative-caret-position="225">
+              <caret line="15" selection-start-line="15" selection-end-line="15" />
             </state>
           </provider>
         </entry>
@@ -44,7 +44,7 @@
       <file leaf-file-name="albumController.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/albumController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
+            <state relative-caret-position="90">
               <caret line="6" column="42" selection-start-line="6" selection-start-column="42" selection-end-line="6" selection-end-column="42" />
             </state>
           </provider>
@@ -53,7 +53,7 @@
       <file leaf-file-name="artistController.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controllers/artistController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
+            <state relative-caret-position="420">
               <caret line="28" selection-start-line="28" selection-end-line="28" />
             </state>
           </provider>
@@ -62,7 +62,7 @@
       <file leaf-file-name="artistList.pug" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/artistList.pug">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
+            <state relative-caret-position="120">
               <caret line="8" column="25" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
             </state>
           </provider>
@@ -71,7 +71,7 @@
       <file leaf-file-name="genreDetails.pug" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/genreDetails.pug">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
+            <state relative-caret-position="60">
               <caret line="4" selection-start-line="4" selection-end-line="4" />
             </state>
           </provider>
@@ -80,7 +80,7 @@
       <file leaf-file-name="genreList.pug" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/genreList.pug">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
+            <state relative-caret-position="75">
               <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
             </state>
           </provider>
@@ -144,8 +144,9 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="82" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="28" />
+    <option name="y" value="22" />
     <option name="width" value="1265" />
     <option name="height" value="746" />
   </component>
@@ -240,24 +241,24 @@
       <workItem from="1530658710034" duration="1348000" />
       <workItem from="1530665668844" duration="1057000" />
       <workItem from="1530737468581" duration="607000" />
-      <workItem from="1530818735155" duration="2411000" />
+      <workItem from="1530756470280" duration="237000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30125000" />
+    <option name="totallyTimeSpent" value="27951000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="82" y="0" width="1265" height="746" extended-state="0" />
+    <frame x="28" y="22" width="1265" height="746" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23716381" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23715416" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.70230263" />
       <window_info id="npm" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.70089287" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32972136" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -555,7 +556,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/genreList.pug">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
+        <state relative-caret-position="75">
           <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
         </state>
       </provider>
@@ -590,21 +591,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/genreDetails.pug">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
+        <state relative-caret-position="60">
           <caret line="4" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/artistList.pug">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
+        <state relative-caret-position="120">
           <caret line="8" column="25" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/artistController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
+        <state relative-caret-position="420">
           <caret line="28" selection-start-line="28" selection-end-line="28" />
         </state>
       </provider>
@@ -625,14 +626,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/albumController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
+        <state relative-caret-position="90">
           <caret line="6" column="42" selection-start-line="6" selection-start-column="42" selection-end-line="6" selection-end-column="42" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
+        <state relative-caret-position="105">
           <caret line="7" column="14" selection-start-line="7" selection-end-line="8" />
         </state>
       </provider>
@@ -646,15 +647,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/genreController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
+        <state relative-caret-position="360">
           <caret line="24" column="42" selection-start-line="24" selection-start-column="42" selection-end-line="24" selection-end-column="42" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/controllers/songController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="106" selection-start-line="14" selection-start-column="106" selection-end-line="14" selection-end-column="106" />
+        <state relative-caret-position="225">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
         </state>
       </provider>
     </entry>

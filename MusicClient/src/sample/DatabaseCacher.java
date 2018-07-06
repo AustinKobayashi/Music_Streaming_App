@@ -39,10 +39,10 @@ public class DatabaseCacher {
 
         String result = Request("/" + url);
 
-        File url_file = new File("cache\\" + url + ".txt");
+        File url_file = new File("cache/" + url + ".txt");
         url_file.delete();
 
-        PrintWriter pw = new PrintWriter("cache\\" + url + ".txt");
+        PrintWriter pw = new PrintWriter("cache/" + url + ".txt");
         pw.println(result);
         pw.close();
     }

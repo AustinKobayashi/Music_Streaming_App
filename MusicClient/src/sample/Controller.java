@@ -79,10 +79,38 @@ public class Controller {
 
         System.out.println("offsetX " + offsetX);
         System.out.println("newTranslateX " + newTranslateX);
+        System.out.println("position " + centerPane.getTranslateX());
 
         if(abs(offsetX) <= 1)
             return;
 
+        if(centerPane.getTranslateX() <= 0 && centerPane.getTranslateX() > -450){
+
+            if(newTranslateX >= - 450/2 && newTranslateX <= 0){
+                MoveAlongPath(centerPane, newTranslateX, 0);
+                centerPane.setTranslateX(0);
+
+            } else if(newTranslateX >= -450 && newTranslateX < -450/2){
+                MoveAlongPath(centerPane, newTranslateX, -450);
+                centerPane.setTranslateX(-450);
+            }
+
+        } else if(centerPane.getTranslateX() <= -450 && centerPane.getTranslateX() > -900) {
+
+            if(newTranslateX >= -900 + 450/2 && newTranslateX <= -450){
+                MoveAlongPath(centerPane, newTranslateX, -450);
+                centerPane.setTranslateX(-450);
+
+            } else if(newTranslateX >= -900 && newTranslateX < -900 + 450/2){
+                MoveAlongPath(centerPane, newTranslateX, -900);
+                centerPane.setTranslateX(-900);
+            }
+        }
+
+        if(centerPane.getTranslateX() > 0)
+            centerPane.setTranslateX(0);
+
+        /*
         if(newTranslateX >= -450/2) {
 
             MoveAlongPath(centerPane, newTranslateX, 0);
@@ -93,6 +121,7 @@ public class Controller {
             MoveAlongPath(centerPane, newTranslateX, -450);
             centerPane.setTranslateX(-450);
         }
+        */
     }
 
 
@@ -110,6 +139,11 @@ public class Controller {
         MoveAlongPath(albumDetails, 0, 450);
     }
 
+
+    @FXML
+    private void ToggleMusicPlayback(){
+        MusicPlayer.getInstance().ToggleMusicPlayback();
+    }
 
 
     private void MoveAlongPath(Node node, double fromX, double toX){
