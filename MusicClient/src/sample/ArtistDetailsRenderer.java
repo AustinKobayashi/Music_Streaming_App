@@ -41,6 +41,18 @@ public class ArtistDetailsRenderer {
 
         Button btn = new Button();
         btn.setText("All Songs");
+        btn.setOnAction(event -> {
+            try {
+                SongListRenderer.getInstance().RenderAllArtistSongs(scene, artistId);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            Node songList = scene.lookup("#songList");
+            NodeMover.getInstance().MoveAlongPath(songList, 0, -450);
+        });
+
+
         GridPane.setHalignment(btn, HPos.CENTER);
         GridPane.setValignment(btn, VPos.CENTER);
         btn.setMinSize(width * 0.8, height * 0.8);

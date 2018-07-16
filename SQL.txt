@@ -69,7 +69,10 @@ INSERT INTO `song` (`id`, `name`, `url`, `genre_id`, `artist_id`, `album_id`)
 VALUES
 	(1, 'Heatstroke', 'heatstroke.mp3', 1, 1, 1),
 	(2, 'Fly Me To The Moon', 'flymetothemoon.mp3', 2, 2, 4),
-	(3, 'All The Stars', 'allthestars.mp3', 3, 3, 5);
+	(3, 'All The Stars', 'allthestars.mp3', 3, 3, 5),
+	(4, 'One Kiss', 'onekiss.mp3', 1, 1, 1),
+	
+	(5, 'This Is What You Came For', 'thisiswhatyoucamefor.mp3', 1, 1, 1);
 
 
 ============================

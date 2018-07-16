@@ -88,7 +88,20 @@ public class DataParser {
 
         return allArtistAlbums;
     }
-    
+
+
+    public JSONArray GetAllArtistSongs(int artistId) throws JSONException {
+
+        JSONArray allArtistSongs = new JSONArray();
+
+        for(JSONObject song : songs.values()){
+            if(song.getInt("artist_id") == artistId)
+                allArtistSongs.put(song);
+        }
+
+        return allArtistSongs;
+    }
+
     
 
     public JSONArray GetAllAlbumSongs(int albumId) throws JSONException {

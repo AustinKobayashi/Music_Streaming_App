@@ -38,6 +38,9 @@ public class Controller {
     @FXML
     private Pane albumDetails;
 
+    @FXML
+    private Pane songList;
+
 
     private double orgSceneX;
     private double orgTranslateX;
@@ -138,6 +141,14 @@ public class Controller {
 
         MoveAlongPath(albumDetails, 0, 450);
     }
+
+
+    @FXML
+    private void SongListBackButton(){
+
+        MoveAlongPath(songList, 0, 450);
+    }
+
 
 
     @FXML

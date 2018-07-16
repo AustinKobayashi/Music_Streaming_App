@@ -84,6 +84,13 @@
             <Button id="playAllBtn" layoutX="20.0" layoutY="67.0" mnemonicParsing="false" text="Play All" />
          </children>
       </Pane>
+      <Pane id="songList" fx:id="songList" layoutX="450.0" prefHeight="696.0" prefWidth="450.0" style="-fx-background-color: white;">
+         <children>
+            <Button layoutX="25.0" layoutY="25.0" mnemonicParsing="false" onAction="#SongListBackButton" text="Back" />
+            <VBox id="songListVbox" layoutY="125.0" prefHeight="696.0" prefWidth="450.0" />
+            <Button id="playAllBtn" layoutX="20.0" layoutY="67.0" mnemonicParsing="false" text="Play All" />
+         </children>
+      </Pane>
       <Pane id="bottomBar" fx:id="bottomBar" layoutY="696.0" prefHeight="104.0" prefWidth="450.0" style="-fx-background-color: #e6e6e6;">
          <children>
             <Button ellipsisString="" layoutX="181.25" layoutY="10.25" maxHeight="87.5" maxWidth="87.5" minHeight="87.5" minWidth="87.5" mnemonicParsing="false" onAction="#ToggleMusicPlayback" style="-fx-background-radius: 5em; -fx-background-image: url('&quot;PlayButton.png&quot;');">
@@ -124,5 +131,6 @@
             <DropShadow />
          </effect>
       </Pane>
+      <Pane id="mediaPlayerPane" prefHeight="0.0" prefWidth="0.0" />
    </children>
 </Pane>

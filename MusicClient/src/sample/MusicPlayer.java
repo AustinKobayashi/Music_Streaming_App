@@ -26,13 +26,18 @@ public class MusicPlayer {
 
     public void PlaySong(Scene scene, String url) {
 
-        Pane bottomBar = (Pane) scene.lookup("#bottomBar");
+        Pane mediaPlayerPane = (Pane) scene.lookup("#mediaPlayerPane");
+
+        if(mediaPlayer != null) {
+            mediaPlayer.dispose();
+            mediaPlayerPane.getChildren().clear();
+        }
 
         Media media = new Media(Test.base_url + "/" + url);
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);
         MediaView mediaView = new MediaView(mediaPlayer);
-        bottomBar.getChildren().add(mediaView);
+        mediaPlayerPane.getChildren().add(mediaView);
         mediaPlayer.play();
 
     }

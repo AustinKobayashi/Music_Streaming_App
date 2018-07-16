@@ -29,21 +29,8 @@ public class AlbumDetailsRenderer {
         albumDetailsVbox.getChildren().clear();
         JSONArray albumSongs = dataParser.GetAllAlbumSongs(albumId);
 
-        for (int i = 0; i < albumSongs.length(); i ++){
+        SongListRenderer songListRenderer = SongListRenderer.getInstance();
 
-            Button btn1 = new Button();
-            btn1.setText(albumSongs.getJSONObject(i).getString("name"));
-            albumDetailsVbox.getChildren().add(btn1);
-
-            int finalI = i;
-            btn1.setOnAction(event -> {
-                try {
-                    MusicPlayer.getInstance().PlaySong(scene, albumSongs.getJSONObject(finalI).getString("url"));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            });
-
-        }
+        songListRenderer.RenderSongList(scene, albumSongs, albumDetailsVbox);
     }
 }
