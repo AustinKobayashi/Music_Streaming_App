@@ -144,9 +144,9 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="28" />
-    <option name="y" value="22" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="89" />
+    <option name="y" value="20" />
     <option name="width" value="1265" />
     <option name="height" value="746" />
   </component>

@@ -18,7 +18,7 @@ public class NodeMover {
 
     public void MoveAlongPath(Node node, double fromX, double toX){
 
-        System.out.println("moving " + node);
+        //System.out.println("moving " + node);
         TranslateTransition translateTransition =  new TranslateTransition();
         translateTransition.setNode(node);
         translateTransition.setDuration(Duration.millis(100));

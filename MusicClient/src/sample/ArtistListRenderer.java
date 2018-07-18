@@ -23,6 +23,11 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import org.json.JSONException;
+import sun.util.locale.provider.FallbackLocaleProviderAdapter;
+
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by Austin on 2018-07-05.
@@ -30,6 +35,8 @@ import org.json.JSONException;
 public class ArtistListRenderer {
 
     private DataParser dataParser;
+
+    private boolean rendered = false;
 
     private static ArtistListRenderer instance = new ArtistListRenderer();
 
@@ -41,6 +48,9 @@ public class ArtistListRenderer {
 
     public void RenderArtistList(Scene scene) throws JSONException {
 
+        if(rendered)
+            return;
+
         dataParser = DataParser.getInstance();
 
         AnchorPane playlistAnchorPane = (AnchorPane) scene.lookup("#playlistAnchorPane");
@@ -51,84 +61,31 @@ public class ArtistListRenderer {
         double width = playlistAnchorPane.widthProperty().doubleValue() / 2;
         double height = playlistAnchorPane.widthProperty().doubleValue() / 3;
 
-        //grid.setGridLinesVisible(true);
-
         int index = 1;
         int x = 0;
         int y = 0;
         int mod = 1;
 
-        while(index <= dataParser.artists.size()) {
+        while (index <= dataParser.artists.size()) {
 
-            ColumnConstraints column1 = new ColumnConstraints(width);
-            column1.setHalignment(HPos.CENTER);
-            grid.getColumnConstraints().add(column1);
-            ColumnConstraints column2 = new ColumnConstraints(width);
-            column2.setHalignment(HPos.CENTER);
-            grid.getColumnConstraints().add(column2);
-            RowConstraints row = new RowConstraints(height);
-            row.setValignment(VPos.CENTER);
-            grid.getRowConstraints().add(row);
-
-
-            VBox vBox = new VBox(5);
-            vBox.setStyle("-fx-background-color: white;");
-            vBox.setMaxSize(width * 0.8, height * 0.8);
-            vBox.setTranslateX(vBox.getTranslateX() + (width * 0.05 * mod));
-
-            DropShadow dropShadow = new DropShadow();
-            dropShadow.setRadius(5.0);
-            dropShadow.setColor(Color.color(0.0, 0.0, 0.0));
-            vBox.setEffect(dropShadow);
-
-            AnchorPane img = new AnchorPane();
-            img.setMinSize(width * 0.72, height * 0.6);
-
-            ImageView noArtistImage = new ImageView(new Image("file:resources\\NoArtistImage.png"));
-
-            AnchorPane.setTopAnchor(noArtistImage, 0.0);
-            AnchorPane.setLeftAnchor(noArtistImage, 0.0);
-            AnchorPane.setRightAnchor(noArtistImage, 0.0);
-
-            img.getChildren().add(noArtistImage);
-
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-
-                    noArtistImage.setFitHeight(img.getHeight());
-                    noArtistImage.setFitWidth(img.getWidth());
-                    noArtistImage.setPreserveRatio(true);
-                    noArtistImage.setVisible(true);
-                }
-            });
-
-
-            Text text = new Text();
-            text.setText(dataParser.artists.get(index).getString("name"));
-            text.setStyle("-fx-font-size: " + 20 + ";");
-            text.setTextAlignment(TextAlignment.CENTER);
-
-            vBox.getChildren().addAll(img, text);
-            vBox.setAlignment(Pos.TOP_CENTER);
-
-            int finalIndex = index;
-            vBox.addEventHandler(MouseEvent.MOUSE_PRESSED,
-                new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent mouseEvent) {
-                        Node artistDetails = scene.lookup("#artistDetails");
-                        try {
-                            System.out.println(finalIndex);
-                            ArtistDetailsRenderer.getInstance().RenderArtistDetails(scene, finalIndex);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        NodeMover.getInstance().MoveAlongPath(artistDetails, 0, -450);
-                    }
-            });
-
+            VBox vBox =VBoxGenerator.GenerateVBox(grid, width, height, dataParser.artists.get(index).getString("name"), index, mod);
             grid.add(vBox, x, y);
+            int artistId = index;
+            vBox.addEventHandler(MouseEvent.MOUSE_PRESSED,
+                    new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent mouseEvent) {
+                            Node artistDetails = scene.lookup("#artistDetails");
+
+                            try {
+                                //System.out.println(artistId);
+                                ArtistDetailsRenderer.getInstance().RenderArtistDetails(scene, artistId);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            NodeMover.getInstance().MoveAlongPath(artistDetails, 0, -450);
+                        }
+                    });
 
             index++;
             y += x;
@@ -137,5 +94,7 @@ public class ArtistListRenderer {
         }
 
         playlistAnchorPane.getChildren().add(grid);
+
+        rendered = true;
     }
 }

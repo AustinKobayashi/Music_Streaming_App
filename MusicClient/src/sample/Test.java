@@ -32,6 +32,9 @@ public class Test extends Application {
 
     public static final String base_url = "http://localhost:3000";
 
+    public static final int displayableWidth = 225;
+    public static final int displayableHeight = 150;
+
     public static Scene scene;
 
     @Override
