@@ -37,9 +37,6 @@ public class ArtistDetailsRenderer {
 
     public void RenderArtistDetails(Scene scene, int artistId) throws JSONException {
 
-
-        System.out.println("Called");
-
         dataParser = DataParser.getInstance();
 
         AnchorPane artistDetailsAnchorPage = (AnchorPane) scene.lookup("#artistDetailsAnchorPage");
@@ -83,19 +80,20 @@ public class ArtistDetailsRenderer {
             } else {
 
                 vBox = VBoxGenerator.GenerateVBox(grid, width, height, artistAlbums.getJSONObject(index - 1).getString("name"), index, mod);
-                int albumId = index;
+                int albumId = artistAlbums.getJSONObject(index - 1).getInt("id");
                 vBox.addEventHandler(MouseEvent.MOUSE_PRESSED,
                     new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent mouseEvent) {
-                            Node albumDetails = scene.lookup("#albumDetails");
+
                             try {
-                                AlbumDetailsRenderer.getInstance().RenderAlbumDetails(scene,
-                                        artistAlbums.getJSONObject(albumId).getInt("id"));
+                                SongListRenderer.getInstance().RenderSongList(scene, dataParser.GetAllAlbumSongs(albumId), (VBox) scene.lookup("#songListVbox"));
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            NodeMover.getInstance().MoveAlongPath(albumDetails, 0, -450);
+
+                            Node songList = scene.lookup("#songList");
+                            NodeMover.getInstance().MoveAlongPath(songList, 0, -450);
                         }
                     });
             }

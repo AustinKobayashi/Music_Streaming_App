@@ -14,6 +14,7 @@ import java.lang.reflect.InvocationTargetException;
  */
 public class MusicPlayer {
 
+
     private static MusicPlayer instance = new MusicPlayer();
 
     private MusicPlayer(){}
@@ -26,6 +27,9 @@ public class MusicPlayer {
 
     public void PlaySong(Scene scene, String url) {
 
+        if (url == null)
+            return;
+
         Pane mediaPlayerPane = (Pane) scene.lookup("#mediaPlayerPane");
 
         if(mediaPlayer != null) {
@@ -36,10 +40,26 @@ public class MusicPlayer {
         Media media = new Media(Test.base_url + "/" + url);
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);
+        mediaPlayer.setOnEndOfMedia(new Runnable() {
+            @Override public void run() {
+                PlaySong(scene, SongQueue.getInstance().GetNextSongUrl());
+            }
+        });
         MediaView mediaView = new MediaView(mediaPlayer);
         mediaPlayerPane.getChildren().add(mediaView);
         mediaPlayer.play();
+    }
 
+
+
+    public void NextSong(){
+        PlaySong(Test.scene, SongQueue.getInstance().GetNextSongUrlWithLoop());
+    }
+
+
+
+    public void PreviousSong(){
+        PlaySong(Test.scene, SongQueue.getInstance().GetPreviousSongUrl());
     }
 
 

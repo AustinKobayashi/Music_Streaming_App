@@ -6,6 +6,7 @@ import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -154,6 +155,18 @@ public class Controller {
     @FXML
     private void ToggleMusicPlayback(){
         MusicPlayer.getInstance().ToggleMusicPlayback();
+    }
+
+
+    @FXML
+    private void NextSongButton(){
+        MusicPlayer.getInstance().NextSong();
+    }
+
+
+    @FXML
+    private void PreviousSongButton(){
+        MusicPlayer.getInstance().PreviousSong();
     }
 
 

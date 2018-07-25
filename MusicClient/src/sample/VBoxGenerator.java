@@ -9,8 +9,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.control.Label;
+
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+
+import java.awt.*;
 
 public class VBoxGenerator {
 
@@ -50,26 +54,20 @@ public class VBoxGenerator {
 
         img.getChildren().add(noArtistImage);
 
-
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
 
-                vBox.setMaxWidth(180);
+                vBox.setMaxWidth(Test.displayableWidth * 0.8);
                 noArtistImage.setFitHeight(Test.displayableHeight * 0.6);
                 noArtistImage.setFitWidth(Test.displayableWidth * 0.8);
 
-                System.out.println("vbox  w" + vBox.getWidth());
-                System.out.println("img w  " + noArtistImage.getFitWidth());
-               // noArtistImage.setPreserveRatio(true);
                 noArtistImage.setVisible(true);
             }
         });
 
-
-        Text text = new Text();
-        text.setText(boxText);
-        text.setStyle("-fx-font-size: " + 20 + ";");
+        Label text = new Label(boxText);
+        text.setStyle("-fx-font-size: " + 20 + "; -fx-padding: 0 10 0 10;");
         text.setTextAlignment(TextAlignment.CENTER);
 
         vBox.getChildren().addAll(img, text);

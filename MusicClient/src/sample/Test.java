@@ -52,7 +52,7 @@ public class Test extends Application {
         primaryStage.show();
 
         ArtistListRenderer.getInstance().RenderArtistList(scene);
-        //AlbumListRenderer.getInstance().RenderAlbumList();
+        AlbumListRenderer.getInstance().RenderAlbumList();
     }
 
 

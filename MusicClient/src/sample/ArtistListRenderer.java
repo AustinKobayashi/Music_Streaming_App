@@ -68,14 +68,13 @@ public class ArtistListRenderer {
 
         while (index <= dataParser.artists.size()) {
 
-            VBox vBox =VBoxGenerator.GenerateVBox(grid, width, height, dataParser.artists.get(index).getString("name"), index, mod);
+            VBox vBox = VBoxGenerator.GenerateVBox(grid, width, height, dataParser.artists.get(index).getString("name"), index, mod);
             grid.add(vBox, x, y);
             int artistId = index;
             vBox.addEventHandler(MouseEvent.MOUSE_PRESSED,
                     new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent mouseEvent) {
-                            Node artistDetails = scene.lookup("#artistDetails");
 
                             try {
                                 //System.out.println(artistId);
@@ -83,6 +82,8 @@ public class ArtistListRenderer {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
+
+                            Node artistDetails = scene.lookup("#artistDetails");
                             NodeMover.getInstance().MoveAlongPath(artistDetails, 0, -450);
                         }
                     });

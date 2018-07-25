@@ -61,7 +61,6 @@ public class DataParser {
     private String ParseCache(String url){
 
         try{
-
             //File text_file = new File("cache\\" + url + ".txt");
 
             List<String> data_list = Files.readAllLines(Paths.get("cache/" + url + ".txt"));

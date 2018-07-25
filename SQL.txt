@@ -28,6 +28,7 @@ CREATE TABLE `album` (
 CREATE TABLE `song` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` char(100) NOT NULL DEFAULT '',
+  `duration` char(100) NOT NULL DEFAULT '',
   `url` char(200) NOT NULL,
   `genre_id` int(11) unsigned NOT NULL,
   `artist_id` int(11) unsigned NOT NULL,
@@ -65,14 +66,14 @@ VALUES
 	(5, 'Black Panther', 3);
 
 
-INSERT INTO `song` (`id`, `name`, `url`, `genre_id`, `artist_id`, `album_id`)
+INSERT INTO `song` (`id`, `name`, `duration`, `url`, `genre_id`, `artist_id`, `album_id`)
 VALUES
-	(1, 'Heatstroke', 'heatstroke.mp3', 1, 1, 1),
-	(2, 'Fly Me To The Moon', 'flymetothemoon.mp3', 2, 2, 4),
-	(3, 'All The Stars', 'allthestars.mp3', 3, 3, 5),
-	(4, 'One Kiss', 'onekiss.mp3', 1, 1, 1),
+	(1, 'Heatstroke', '3:49', 'heatstroke.mp3', 1, 1, 1),
+	(2, 'Fly Me To The Moon', '2:35', 'flymetothemoon.mp3', 2, 2, 4),
+	(3, 'All The Stars', '3:54', 'allthestars.mp3', 3, 3, 5),
+	(4, 'One Kiss', '3:32', 'onekiss.mp3', 1, 1, 1),
 	
-	(5, 'This Is What You Came For', 'thisiswhatyoucamefor.mp3', 1, 1, 1);
+	(5, 'This Is What You Came For', '3:42', 'thisiswhatyoucamefor.mp3', 1, 1, 1);
 
 
 ============================
