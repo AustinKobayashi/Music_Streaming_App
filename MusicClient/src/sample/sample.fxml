@@ -57,7 +57,7 @@
                 <AnchorPane id="playlistAnchorPane" fx:id="playlistAnchorPane" minHeight="0.0" minWidth="0.0" onMouseDragged="#SwipeDrag" onMousePressed="#SwipeClick" onMouseReleased="#SwipeRelease" prefHeight="571.0" prefWidth="450.0" />
               </content>
             </ScrollPane>
-            <ScrollPane id="albumScrollPane" fx:id="albumScrollPane" focusTraversable="false" hbarPolicy="NEVER" layoutX="450.0" onDragOver="#SwipeDrag" onMouseDragged="#SwipeDrag" onMousePressed="#SwipeClick" onMouseReleased="#SwipeRelease" prefHeight="571.0" prefWidth="450.0" />
+            <ScrollPane id="albumScrollPane" fx:id="albumScrollPane" focusTraversable="false" hbarPolicy="NEVER" layoutX="450.0" onMouseDragged="#SwipeDrag" onMousePressed="#SwipeClick" onMouseReleased="#SwipeRelease" prefHeight="571.0" prefWidth="450.0" />
             <StackPane layoutX="900.0" prefHeight="571.0" prefWidth="450.0">
                <children>
                   <ScrollPane focusTraversable="false" hbarPolicy="NEVER" layoutX="22.5" maxWidth="-Infinity" onMouseDragged="#SwipeDrag" onMousePressed="#SwipeClick" onMouseReleased="#SwipeRelease" prefHeight="571.0" prefWidth="405.0" style="-fx-background-color: white;">
