@@ -28,6 +28,9 @@ public class Controller {
     @FXML
     private ScrollPane playlistScrollPane;
     @FXML
+    private ScrollPane albumScrollPane;
+
+    @FXML
     private AnchorPane playlistAnchorPane;
 
     @FXML
@@ -56,7 +59,7 @@ public class Controller {
     private void SwipeClick(MouseEvent t){
         orgSceneX = t.getSceneX();
         orgTranslateX = centerPane.getTranslateX();
-
+        System.out.println("click");
         //System.out.println(centerPane.getBoundsInLocal().getMinY());
         //System.out.println("orgSceneX " + orgSceneX);
         //System.out.println("orgTranslateX " + orgTranslateX);

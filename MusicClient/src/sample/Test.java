@@ -53,6 +53,7 @@ public class Test extends Application {
 
         ArtistListRenderer.getInstance().RenderArtistList(scene);
         AlbumListRenderer.getInstance().RenderAlbumList();
+        SongListRenderer.getInstance().RenderAllSongs(scene);
     }
 
 

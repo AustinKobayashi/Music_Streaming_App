@@ -59,7 +59,11 @@ public class MusicPlayer {
 
 
     public void PreviousSong(){
-        PlaySong(Test.scene, SongQueue.getInstance().GetPreviousSongUrl());
+
+        if(mediaPlayer.getCurrentTime().toMillis() >= 3000)
+            mediaPlayer.seek(new Duration(0));
+        else
+            PlaySong(Test.scene, SongQueue.getInstance().GetPreviousSongUrl());
     }
 
 

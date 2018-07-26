@@ -6,6 +6,7 @@ import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import org.json.JSONException;
@@ -35,13 +36,12 @@ public class AlbumListRenderer {
         dataParser = DataParser.getInstance();
         Scene scene = Test.scene;
 
-        AnchorPane albumAnchorPane = (AnchorPane) scene.lookup("#albumAnchorPane");
-        albumAnchorPane.getChildren().clear();
+        ScrollPane albumScrollPane = (ScrollPane) scene.lookup("#albumScrollPane");
 
         GridPane grid = new GridPane();
 
-        double width = albumAnchorPane.widthProperty().doubleValue() / 2;
-        double height = albumAnchorPane.widthProperty().doubleValue() / 3;
+        double width = albumScrollPane.widthProperty().doubleValue() / 2;
+        double height = albumScrollPane.widthProperty().doubleValue() / 3;
 
         int index = 1;
         int x = 0;
@@ -50,21 +50,29 @@ public class AlbumListRenderer {
 
         while(index <= dataParser.albums.size()){
 
-            VBox vBox = VBoxGenerator.GenerateVBox(grid, width, height, dataParser.albums.get(index).getString("name"), index, mod);
+            VBox vBox = VBoxGenerator.GenerateAlbumVBox(grid, width, height, dataParser.albums.get(index).getString("name"), index, mod);
             grid.add(vBox, x, y);
-            int artistId = index;
+            //int artistId = index;
+            int albumId = index;
+
             vBox.addEventHandler(MouseEvent.MOUSE_PRESSED,
                     new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent mouseEvent) {
                             try {
-                                AlbumDetailsRenderer.getInstance().RenderAlbumDetails(scene, artistId);
+                                //AlbumDetailsRenderer.getInstance().RenderAlbumDetails(scene, artistId);
+                                SongListRenderer.getInstance().RenderSongList(scene, dataParser.GetAllAlbumSongs(albumId), (VBox) scene.lookup("#songListVbox"));
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
 
+                            /*
                             Node albumDetails = scene.lookup("#albumDetails");
                             NodeMover.getInstance().MoveAlongPath(albumDetails, 0, -450);
+                            */
+                            Node songList = scene.lookup("#songList");
+                            NodeMover.getInstance().MoveAlongPath(songList, 0, -450);
                         }
                     });
 
@@ -74,8 +82,7 @@ public class AlbumListRenderer {
             mod *= -1;
         }
 
-        albumAnchorPane.getChildren().add(grid);
-
+        albumScrollPane.setContent(grid);
         rendered = true;
     }
 }

@@ -8,6 +8,7 @@ import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -39,6 +40,12 @@ public class ArtistDetailsRenderer {
 
         dataParser = DataParser.getInstance();
 
+        ImageView artistImage = (ImageView) scene.lookup("#artistImage");
+        artistImage.setImage(new Image("file:resources\\NoArtistImageExtended.png", 450, 0, true, false));
+
+        Label artistNameLabel = (Label) scene.lookup("#artistNameLabel");
+        artistNameLabel.setText(dataParser.GetArtistName(artistId));
+
         AnchorPane artistDetailsAnchorPage = (AnchorPane) scene.lookup("#artistDetailsAnchorPage");
         artistDetailsAnchorPage.getChildren().clear();
         GridPane grid = new GridPane();
@@ -61,7 +68,7 @@ public class ArtistDetailsRenderer {
 
             if(index == 0){
 
-                vBox = VBoxGenerator.GenerateVBox(grid, width, height, "All Songs", index, mod);
+                vBox = VBoxGenerator.GenerateAlbumVBox(grid, width, height, "All Songs", index, mod);
                 vBox.addEventHandler(MouseEvent.MOUSE_PRESSED,
                     new EventHandler<MouseEvent>() {
                         @Override
@@ -79,7 +86,7 @@ public class ArtistDetailsRenderer {
 
             } else {
 
-                vBox = VBoxGenerator.GenerateVBox(grid, width, height, artistAlbums.getJSONObject(index - 1).getString("name"), index, mod);
+                vBox = VBoxGenerator.GenerateAlbumVBox(grid, width, height, artistAlbums.getJSONObject(index - 1).getString("name"), index, mod);
                 int albumId = artistAlbums.getJSONObject(index - 1).getInt("id");
                 vBox.addEventHandler(MouseEvent.MOUSE_PRESSED,
                     new EventHandler<MouseEvent>() {

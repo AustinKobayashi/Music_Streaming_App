@@ -114,4 +114,17 @@ public class DataParser {
 
         return allAlbumSongs;
     }
+
+
+
+    public JSONArray GetAllSongs(){
+
+        return new JSONArray(songs.values());
+    }
+
+
+
+    public String GetArtistName(int id){
+        return artists.get(id).getString("name");
+    }
 }

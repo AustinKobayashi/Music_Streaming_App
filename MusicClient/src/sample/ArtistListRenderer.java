@@ -68,7 +68,7 @@ public class ArtistListRenderer {
 
         while (index <= dataParser.artists.size()) {
 
-            VBox vBox = VBoxGenerator.GenerateVBox(grid, width, height, dataParser.artists.get(index).getString("name"), index, mod);
+            VBox vBox = VBoxGenerator.GenerateArtistVBox(grid, width, height, dataParser.artists.get(index).getString("name"), index, mod);
             grid.add(vBox, x, y);
             int artistId = index;
             vBox.addEventHandler(MouseEvent.MOUSE_PRESSED,

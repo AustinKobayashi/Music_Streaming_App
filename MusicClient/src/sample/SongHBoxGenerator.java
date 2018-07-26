@@ -1,14 +1,15 @@
 package sample;
 
 import javafx.geometry.Pos;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import org.json.JSONObject;
 import javafx.scene.control.Label;
 
-
-import java.awt.*;
 
 public class SongHBoxGenerator {
 
@@ -32,6 +33,39 @@ public class SongHBoxGenerator {
 
         vbox.getChildren().addAll(songNameLabel, songDurationLabel);
         hbox.getChildren().addAll(songNumberLabel, vbox);
+
+        return hbox;
+    }
+
+
+    public static HBox GenerateSongHboxWithImage(JSONObject song){
+
+        HBox hbox = new HBox();
+        hbox.setAlignment(Pos.CENTER_LEFT);
+
+        StackPane pane = new StackPane();
+        pane.setMaxSize(Test.displayableWidth / 5, Test.displayableWidth / 5);
+
+        ImageView image = new ImageView(new Image("file:resources\\NoAlbumImageSquare.png"));
+        image.setFitWidth(Test.displayableWidth / 5);
+        image.setFitHeight(Test.displayableWidth / 5);
+        pane.setStyle("-fx-padding: 0 22.5 0 22.5;");
+
+        pane.getChildren().add(image);
+
+        VBox vbox = new VBox();
+
+        Label songNameLabel = new Label(song.getString("name"));
+        songNameLabel.setStyle("-fx-font-size: 20;");
+
+        Label artistAndDurationLabel = new Label(DataParser.getInstance().GetArtistName(song.getInt("artist_id")) +
+        " · " + song.getString("duration"));
+        artistAndDurationLabel.setStyle("-fx-font-size: 12;");
+
+        vbox.setStyle("-fx-padding: 10 0 10 0;");
+
+        vbox.getChildren().addAll(songNameLabel, artistAndDurationLabel);
+        hbox.getChildren().addAll(pane, vbox);
 
         return hbox;
     }

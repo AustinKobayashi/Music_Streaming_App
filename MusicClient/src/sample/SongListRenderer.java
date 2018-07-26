@@ -4,7 +4,9 @@ import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.json.JSONArray;
@@ -26,6 +28,24 @@ public class SongListRenderer {
     public static SongListRenderer getInstance(){ return instance; }
 
 
+    public void RenderAllSongs(Scene scene){
+
+        dataParser = DataParser.getInstance();
+
+        AnchorPane songAnchorPane = (AnchorPane) scene.lookup("#songAnchorPane");
+
+        VBox vbox = new VBox();
+
+        JSONArray allSongs = dataParser.GetAllSongs();
+
+        RenderSongList(scene, allSongs, vbox, true);
+
+        songAnchorPane.getChildren().add(vbox);
+
+    }
+
+
+
     public void RenderAllArtistSongs(Scene scene, int artistId) throws JSONException {
 
         dataParser = DataParser.getInstance();
@@ -38,8 +58,12 @@ public class SongListRenderer {
     }
 
 
-
     public void RenderSongList(Scene scene, JSONArray objectArrray, VBox vBox){
+        RenderSongList(scene, objectArrray, vBox, false);
+    }
+
+
+    public void RenderSongList(Scene scene, JSONArray objectArrray, VBox vBox, boolean useImage){
 
         queue = SongQueue.getInstance();
 
@@ -52,7 +76,9 @@ public class SongListRenderer {
 
         for (int i = 0; i < objectArrray.length(); i ++){
 
-            HBox hBox = SongHBoxGenerator.GenerateSongHbox(objectArrray.getJSONObject(i), i + 1);
+            HBox hBox = useImage ? SongHBoxGenerator.GenerateSongHboxWithImage(objectArrray.getJSONObject(i)) :
+                    SongHBoxGenerator.GenerateSongHbox(objectArrray.getJSONObject(i), i + 1);
+
             int finalI = i;
             hBox.addEventHandler(MouseEvent.MOUSE_PRESSED,
                 new EventHandler<MouseEvent>() {
@@ -71,7 +97,6 @@ public class SongListRenderer {
 
             vBox.getChildren().add(hBox);
         }
-
 
         Button playAllBtn = (Button) scene.lookup("#playAllSongsBtn");
         playAllBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
