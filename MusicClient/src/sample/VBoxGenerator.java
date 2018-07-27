@@ -21,18 +21,7 @@ public class VBoxGenerator {
 
     public static VBox GenerateArtistVBox(GridPane grid, double width1, double height1, String boxText, int index, int mod){
 
-        ColumnConstraints column1 = new ColumnConstraints(225);
-        column1.setHalignment(HPos.CENTER);
-        grid.getColumnConstraints().add(column1);
-        ColumnConstraints column2 = new ColumnConstraints(225);
-        column2.setHalignment(HPos.CENTER);
-        grid.getColumnConstraints().add(column2);
-        RowConstraints row = new RowConstraints(150);
-        row.setValignment(VPos.CENTER);
-        grid.getRowConstraints().add(row);
-
-
-        VBox vBox = new VBox(5);
+        VBox vBox = new VBox();
         vBox.setStyle("-fx-background-color: white;");
         vBox.setMaxSize(180, 120);
 
@@ -80,20 +69,9 @@ public class VBoxGenerator {
 
     public static VBox GenerateAlbumVBox(GridPane grid, double width1, double height1, String boxText, int index, int mod){
 
-        ColumnConstraints column1 = new ColumnConstraints(225);
-        column1.setHalignment(HPos.CENTER);
-        grid.getColumnConstraints().add(column1);
-        ColumnConstraints column2 = new ColumnConstraints(225);
-        column2.setHalignment(HPos.CENTER);
-        grid.getColumnConstraints().add(column2);
-        RowConstraints row = new RowConstraints(230);
-        row.setValignment(VPos.CENTER);
-        grid.getRowConstraints().add(row);
-
-
-        VBox vBox = new VBox(5);
+        VBox vBox = new VBox();
         vBox.setStyle("-fx-background-color: white;");
-        vBox.setMaxSize(180, 210);
+        vBox.setMaxSize(180, 231);
 
         vBox.setTranslateX(vBox.getTranslateX() + (180 * 0.05 * mod));
 
@@ -118,12 +96,14 @@ public class VBoxGenerator {
             public void run() {
 
                 vBox.setMaxWidth(Test.displayableWidth * 0.8);
-                noArtistImage.setFitHeight(210 * 0.8);
+                //noArtistImage.setFitHeight(210 * 0.8);
+                noArtistImage.setPreserveRatio(true);
                 noArtistImage.setFitWidth(Test.displayableWidth * 0.8);
 
                 noArtistImage.setVisible(true);
             }
         });
+
 
         Label text = new Label(boxText);
         text.setStyle("-fx-font-size: " + 20 + "; -fx-padding: 0 10 0 10;");

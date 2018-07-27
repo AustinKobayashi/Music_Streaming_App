@@ -50,49 +50,40 @@
             </Text>
          </children>
       </Pane>
-      <Pane fx:id="centerPane" layoutY="125.0" onMouseDragged="#SwipeDrag" onMousePressed="#SwipeClick" onMouseReleased="#SwipeRelease" prefHeight="571.0" prefWidth="1350.0">
+      <Pane id="centerPane" fx:id="centerPane" layoutY="125.0" onMouseDragged="#SwipeDrag" onMousePressed="#SwipeClick" onMouseReleased="#SwipeRelease" prefHeight="571.0" prefWidth="1350.0">
          <children>
-            <ScrollPane fx:id="playlistScrollPane" focusTraversable="false" hbarPolicy="NEVER" onMouseDragged="#SwipeDrag" onMousePressed="#SwipeClick" onMouseReleased="#SwipeRelease" prefHeight="571.0" prefWidth="450.0" vbarPolicy="NEVER">
-              <content>
-                <AnchorPane id="playlistAnchorPane" fx:id="playlistAnchorPane" minHeight="0.0" minWidth="0.0" onMouseDragged="#SwipeDrag" onMousePressed="#SwipeClick" onMouseReleased="#SwipeRelease" prefHeight="571.0" prefWidth="450.0" />
-              </content>
-            </ScrollPane>
-            <ScrollPane id="albumScrollPane" fx:id="albumScrollPane" focusTraversable="false" hbarPolicy="NEVER" layoutX="450.0" onMouseDragged="#SwipeDrag" onMousePressed="#SwipeClick" onMouseReleased="#SwipeRelease" prefHeight="571.0" prefWidth="450.0" />
-            <StackPane layoutX="900.0" prefHeight="571.0" prefWidth="450.0">
-               <children>
-                  <ScrollPane focusTraversable="false" hbarPolicy="NEVER" layoutX="22.5" maxWidth="-Infinity" onMouseDragged="#SwipeDrag" onMousePressed="#SwipeClick" onMouseReleased="#SwipeRelease" prefHeight="571.0" prefWidth="405.0" style="-fx-background-color: white;">
-                     <content>
-                        <AnchorPane id="songAnchorPane" minHeight="0.0" minWidth="0.0" onMouseDragged="#SwipeDrag" onMousePressed="#SwipeClick" onMouseReleased="#SwipeRelease" prefHeight="571.0" prefWidth="405.0" style="-fx-background-color: white;" />
-                     </content>
-                  </ScrollPane>
-               </children>
-            </StackPane>
+            <ScrollPane id="playlistScrollPane" fx:id="playlistScrollPane" focusTraversable="false" hbarPolicy="NEVER" prefHeight="571.0" prefWidth="450.0" vbarPolicy="NEVER" />
+            <ScrollPane id="albumScrollPane" fx:id="albumScrollPane" focusTraversable="false" hbarPolicy="NEVER" layoutX="450.0" pickOnBounds="false" prefHeight="571.0" prefWidth="450.0" vbarPolicy="ALWAYS" />
+            <ScrollPane id="songListScrollPane" focusTraversable="false" hbarPolicy="NEVER" layoutX="900.0" maxWidth="-Infinity" prefHeight="571.0" prefWidth="450.0" />
          </children>
       </Pane>
       <Pane id="artistDetails" fx:id="artistDetails" layoutX="450.0" prefHeight="696.0" prefWidth="450.0" style="-fx-background-color: white;">
          <children>
-            <StackPane prefHeight="175.0" prefWidth="450.0">
-               <children>
-                  <ImageView id="artistImage" fitHeight="175.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true" />
-               </children>
-            </StackPane>
-            <StackPane layoutY="175.0" prefHeight="50.0" prefWidth="450.0" style="-fx-background-color: white;">
-               <children>
-                  <Label id="artistNameLabel" text="Artist Name">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                     <padding>
-                        <Insets left="30.0" right="30.0" />
-                     </padding>
-                  </Label>
-               </children>
-            </StackPane>
-            <Button layoutX="25.0" layoutY="25.0" mnemonicParsing="false" onAction="#ArtistDetailsBackButton" text="Back" />
-            <ScrollPane hbarPolicy="NEVER" layoutY="225.0" prefHeight="471.0" prefWidth="450.0" vbarPolicy="NEVER">
-              <content>
-                <AnchorPane id="artistDetailsAnchorPage" minHeight="0.0" minWidth="0.0" prefHeight="471.0" prefWidth="450.0" />
-              </content>
+            <ScrollPane id="artistDetailsScrollPane" hbarPolicy="NEVER" prefHeight="696.0" prefWidth="450.0" vbarPolicy="NEVER">
+               <content>
+                  <VBox id="artistDetailsVbox" prefWidth="450.0">
+                     <children>
+                        <StackPane id="test1" prefHeight="175.0" prefWidth="450.0">
+                           <children>
+                              <ImageView id="artistImage" fitHeight="175.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true" />
+                              <Button mnemonicParsing="false" onAction="#ArtistDetailsBackButton" text="Back" StackPane.alignment="TOP_LEFT" />
+                           </children>
+                        </StackPane>
+                        <StackPane id="test1" prefHeight="50.0" prefWidth="450.0" style="-fx-background-color: white;">
+                           <children>
+                              <Label id="artistNameLabel" text="Artist Name">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="30.0" right="30.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                        </StackPane>
+                     </children>
+                  </VBox>
+               </content>
             </ScrollPane>
          </children></Pane>
       <Pane id="albumDetails" fx:id="albumDetails" layoutX="450.0" prefHeight="696.0" prefWidth="450.0" style="-fx-background-color: white;">

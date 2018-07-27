@@ -9,8 +9,8 @@ import java.util.List;
 public class Playlist {
 
     public String name;
-    ArrayList<String> playList = new ArrayList<>();
-    int position = 0;
+    private ArrayList<String> playList = new ArrayList<>();
+    private int position = 0;
 
     public Playlist(String name){
         this.name = name;

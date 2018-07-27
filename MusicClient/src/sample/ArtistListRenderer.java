@@ -12,6 +12,7 @@ import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -53,13 +54,21 @@ public class ArtistListRenderer {
 
         dataParser = DataParser.getInstance();
 
-        AnchorPane playlistAnchorPane = (AnchorPane) scene.lookup("#playlistAnchorPane");
-        playlistAnchorPane.getChildren().clear();
+        ScrollPane albumScrollPane = (ScrollPane) scene.lookup("#playlistScrollPane");
 
         GridPane grid = new GridPane();
 
-        double width = playlistAnchorPane.widthProperty().doubleValue() / 2;
-        double height = playlistAnchorPane.widthProperty().doubleValue() / 3;
+        ColumnConstraints column1 = new ColumnConstraints(225);
+        column1.setHalignment(HPos.CENTER);
+        grid.getColumnConstraints().add(column1);
+        ColumnConstraints column2 = new ColumnConstraints(225);
+        column2.setHalignment(HPos.CENTER);
+        grid.getColumnConstraints().add(column2);
+        RowConstraints row = new RowConstraints(150);
+        row.setValignment(VPos.CENTER);
+
+        double width = albumScrollPane.widthProperty().doubleValue() / 2;
+        double height = albumScrollPane.widthProperty().doubleValue() / 3;
 
         int index = 1;
         int x = 0;
@@ -68,10 +77,20 @@ public class ArtistListRenderer {
 
         while (index <= dataParser.artists.size()) {
 
+            if(index % 2 == 1)
+                grid.getRowConstraints().add(row);
+
             VBox vBox = VBoxGenerator.GenerateArtistVBox(grid, width, height, dataParser.artists.get(index).getString("name"), index, mod);
             grid.add(vBox, x, y);
             int artistId = index;
-            vBox.addEventHandler(MouseEvent.MOUSE_PRESSED,
+
+            vBox.addEventHandler(MouseEvent.ANY,
+                    new NodeEventHandler(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent mouseEvent) {
+                            NodeMover.getInstance().SwipeDrag(mouseEvent);
+                        }
+                    },
                     new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent mouseEvent) {
@@ -86,7 +105,7 @@ public class ArtistListRenderer {
                             Node artistDetails = scene.lookup("#artistDetails");
                             NodeMover.getInstance().MoveAlongPath(artistDetails, 0, -450);
                         }
-                    });
+                    }));
 
             index++;
             y += x;
@@ -94,7 +113,32 @@ public class ArtistListRenderer {
             mod *= -1;
         }
 
-        playlistAnchorPane.getChildren().add(grid);
+        albumScrollPane.setContent(grid);
+
+        grid.addEventHandler(MouseEvent.MOUSE_PRESSED,
+                new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        NodeMover.getInstance().SwipeClick(mouseEvent);
+                    }
+                });
+
+        grid.addEventHandler(MouseEvent.MOUSE_RELEASED,
+                new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        NodeMover.getInstance().SwipeRelease(mouseEvent);
+                    }
+                });
+
+        grid.addEventHandler(MouseEvent.MOUSE_DRAGGED,
+                new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        NodeMover.getInstance().SwipeDrag(mouseEvent);
+                    }
+                });
+
 
         rendered = true;
     }

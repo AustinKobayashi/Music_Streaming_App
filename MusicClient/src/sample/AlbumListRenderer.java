@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
@@ -40,6 +41,15 @@ public class AlbumListRenderer {
 
         GridPane grid = new GridPane();
 
+        ColumnConstraints column1 = new ColumnConstraints(225);
+        column1.setHalignment(HPos.CENTER);
+        grid.getColumnConstraints().add(column1);
+        ColumnConstraints column2 = new ColumnConstraints(225);
+        column2.setHalignment(HPos.CENTER);
+        grid.getColumnConstraints().add(column2);
+        RowConstraints row = new RowConstraints(260);
+        row.setValignment(VPos.CENTER);
+
         double width = albumScrollPane.widthProperty().doubleValue() / 2;
         double height = albumScrollPane.widthProperty().doubleValue() / 3;
 
@@ -50,11 +60,37 @@ public class AlbumListRenderer {
 
         while(index <= dataParser.albums.size()){
 
+            if(index % 2 == 1)
+                grid.getRowConstraints().add(row);
+
             VBox vBox = VBoxGenerator.GenerateAlbumVBox(grid, width, height, dataParser.albums.get(index).getString("name"), index, mod);
             grid.add(vBox, x, y);
-            //int artistId = index;
+
             int albumId = index;
 
+            vBox.addEventHandler(MouseEvent.ANY,
+                    new NodeEventHandler(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent mouseEvent) {
+                            NodeMover.getInstance().SwipeDrag(mouseEvent);
+                        }
+                    },
+                    new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent mouseEvent) {
+                            try {
+                                SongListRenderer.getInstance().RenderSongList(scene, dataParser.GetAllAlbumSongs(albumId), (VBox) scene.lookup("#songListVbox"));
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            Node songList = scene.lookup("#songList");
+                            NodeMover.getInstance().MoveAlongPath(songList, 0, -450);
+                        }
+                    }));
+
+            /*
             vBox.addEventHandler(MouseEvent.MOUSE_PRESSED,
                     new EventHandler<MouseEvent>() {
                         @Override
@@ -67,14 +103,15 @@ public class AlbumListRenderer {
                                 e.printStackTrace();
                             }
 
-                            /*
+
                             Node albumDetails = scene.lookup("#albumDetails");
                             NodeMover.getInstance().MoveAlongPath(albumDetails, 0, -450);
-                            */
+
                             Node songList = scene.lookup("#songList");
                             NodeMover.getInstance().MoveAlongPath(songList, 0, -450);
                         }
                     });
+                    */
 
             index++;
             y += x;
@@ -83,6 +120,32 @@ public class AlbumListRenderer {
         }
 
         albumScrollPane.setContent(grid);
+
+        grid.addEventHandler(MouseEvent.MOUSE_PRESSED,
+                new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        NodeMover.getInstance().SwipeClick(mouseEvent);
+                    }
+                });
+
+        grid.addEventHandler(MouseEvent.MOUSE_RELEASED,
+                new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        NodeMover.getInstance().SwipeRelease(mouseEvent);
+                    }
+                });
+
+        grid.addEventHandler(MouseEvent.MOUSE_DRAGGED,
+                new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        NodeMover.getInstance().SwipeDrag(mouseEvent);
+                    }
+                });
+
+
         rendered = true;
     }
 }

@@ -41,6 +41,9 @@ public class SongHBoxGenerator {
     public static HBox GenerateSongHboxWithImage(JSONObject song){
 
         HBox hbox = new HBox();
+
+        hbox.setStyle("-fx-padding: 0 45 0 45");
+
         hbox.setAlignment(Pos.CENTER_LEFT);
 
         StackPane pane = new StackPane();
@@ -49,7 +52,6 @@ public class SongHBoxGenerator {
         ImageView image = new ImageView(new Image("file:resources\\NoAlbumImageSquare.png"));
         image.setFitWidth(Test.displayableWidth / 5);
         image.setFitHeight(Test.displayableWidth / 5);
-        pane.setStyle("-fx-padding: 0 22.5 0 22.5;");
 
         pane.getChildren().add(image);
 
@@ -62,7 +64,7 @@ public class SongHBoxGenerator {
         " · " + song.getString("duration"));
         artistAndDurationLabel.setStyle("-fx-font-size: 12;");
 
-        vbox.setStyle("-fx-padding: 10 0 10 0;");
+        vbox.setStyle("-fx-padding: 10 0 10 10;");
 
         vbox.getChildren().addAll(songNameLabel, artistAndDurationLabel);
         hbox.getChildren().addAll(pane, vbox);

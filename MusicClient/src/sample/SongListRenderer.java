@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -32,16 +33,43 @@ public class SongListRenderer {
 
         dataParser = DataParser.getInstance();
 
-        AnchorPane songAnchorPane = (AnchorPane) scene.lookup("#songAnchorPane");
+        ScrollPane songListScrollPane = (ScrollPane) scene.lookup("#songListScrollPane");
 
         VBox vbox = new VBox();
-
+        vbox.setAlignment(Pos.CENTER);
         JSONArray allSongs = dataParser.GetAllSongs();
 
         RenderSongList(scene, allSongs, vbox, true);
 
-        songAnchorPane.getChildren().add(vbox);
+        songListScrollPane.setContent(vbox);
 
+        if(65 * allSongs.length() < 561)
+            vbox.setStyle("-fx-padding: 0 0 " + (561 - 65 * allSongs.length()) + " 0;");
+
+        vbox.addEventHandler(MouseEvent.MOUSE_PRESSED,
+                new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        System.out.println("click");
+                        NodeMover.getInstance().SwipeClick(mouseEvent);
+                    }
+                });
+
+        vbox.addEventHandler(MouseEvent.MOUSE_RELEASED,
+                new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        NodeMover.getInstance().SwipeRelease(mouseEvent);
+                    }
+                });
+
+        vbox.addEventHandler(MouseEvent.MOUSE_DRAGGED,
+                new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        NodeMover.getInstance().SwipeDrag(mouseEvent);
+                    }
+                });
     }
 
 
@@ -63,6 +91,7 @@ public class SongListRenderer {
     }
 
 
+
     public void RenderSongList(Scene scene, JSONArray objectArrray, VBox vBox, boolean useImage){
 
         queue = SongQueue.getInstance();
@@ -80,20 +109,43 @@ public class SongListRenderer {
                     SongHBoxGenerator.GenerateSongHbox(objectArrray.getJSONObject(i), i + 1);
 
             int finalI = i;
-            hBox.addEventHandler(MouseEvent.MOUSE_PRESSED,
-                new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent mouseEvent) {
-                        try {
-                            queue.ClearQueue();
-                            queue.AddAllSongs(urlList);
-                            queue.SetPos(finalI);
-                            MusicPlayer.getInstance().PlaySong(scene, queue.GetCurrentSongUrl());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+            if(useImage) {
+                hBox.addEventHandler(MouseEvent.ANY,
+                        new NodeEventHandler(new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent mouseEvent) {
+                                NodeMover.getInstance().SwipeDrag(mouseEvent);
+                            }
+                        },
+                        new EventHandler<MouseEvent>() {
+                            @Override
+                            public void handle(MouseEvent mouseEvent) {
+                                try {
+                                    queue.ClearQueue();
+                                    queue.AddAllSongs(urlList);
+                                    queue.SetPos(finalI);
+                                    MusicPlayer.getInstance().PlaySong(scene, queue.GetCurrentSongUrl());
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }));
+            } else {
+                hBox.addEventHandler(MouseEvent.MOUSE_PRESSED,
+                    new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent mouseEvent) {
+                            try {
+                                queue.ClearQueue();
+                                queue.AddAllSongs(urlList);
+                                queue.SetPos(finalI);
+                                MusicPlayer.getInstance().PlaySong(scene, queue.GetCurrentSongUrl());
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
-                    }
-                });
+                    });
+            }
 
             vBox.getChildren().add(hBox);
         }

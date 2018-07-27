@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -46,12 +47,27 @@ public class ArtistDetailsRenderer {
         Label artistNameLabel = (Label) scene.lookup("#artistNameLabel");
         artistNameLabel.setText(dataParser.GetArtistName(artistId));
 
-        AnchorPane artistDetailsAnchorPage = (AnchorPane) scene.lookup("#artistDetailsAnchorPage");
-        artistDetailsAnchorPage.getChildren().clear();
-        GridPane grid = new GridPane();
+        VBox artistDetailsVbox = (VBox) scene.lookup("#artistDetailsVbox");
 
-        double width = artistDetailsAnchorPage.widthProperty().doubleValue() / 2;
-        double height = artistDetailsAnchorPage.widthProperty().doubleValue() / 3;
+        artistDetailsVbox.getChildren().remove(scene.lookup("#artistDetailsGrid"));
+
+        GridPane grid = new GridPane();
+        grid.setId("artistDetailsGrid");
+
+        ColumnConstraints column1 = new ColumnConstraints(225);
+        column1.setHalignment(HPos.CENTER);
+        grid.getColumnConstraints().add(column1);
+        ColumnConstraints column2 = new ColumnConstraints(225);
+        column2.setHalignment(HPos.CENTER);
+        grid.getColumnConstraints().add(column2);
+        RowConstraints row = new RowConstraints(275);
+        row.setValignment(VPos.CENTER);
+        grid.getRowConstraints().add(row);
+
+
+        double width = artistDetailsVbox.widthProperty().doubleValue() / 2;
+        //double height = artistDetailsVbox.widthProperty().doubleValue() / 3;
+        double height = 471 / 3;
 
         dataParser = DataParser.getInstance();
 
@@ -113,80 +129,34 @@ public class ArtistDetailsRenderer {
             mod *= -1;
         }
 
-        /*
-        Button btn = new Button();
-        btn.setText("All Songs");
-        btn.setOnAction(event -> {
-            try {
-                SongListRenderer.getInstance().RenderAllArtistSongs(scene, artistId);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            Node songList = scene.lookup("#songList");
-            NodeMover.getInstance().MoveAlongPath(songList, 0, -450);
-        });
-
-        */
-
+        //grid.setStyle("-fx-border-style: solid; -fx-border-color: red;");
+        artistDetailsVbox.getChildren().add(grid);
 
         /*
-        grid.setGridLinesVisible(true);
+        grid.addEventHandler(MouseEvent.MOUSE_PRESSED,
+                new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        NodeMover.getInstance().SwipeClick(mouseEvent);
+                    }
+                });
 
-        Button btn = new Button();
-        btn.setText("All Songs");
-        btn.setOnAction(event -> {
-            try {
-                SongListRenderer.getInstance().RenderAllArtistSongs(scene, artistId);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+        grid.addEventHandler(MouseEvent.MOUSE_RELEASED,
+                new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        NodeMover.getInstance().SwipeRelease(mouseEvent);
+                    }
+                });
 
-            Node songList = scene.lookup("#songList");
-            NodeMover.getInstance().MoveAlongPath(songList, 0, -450);
-        });
-
-
-        GridPane.setHalignment(btn, HPos.CENTER);
-        GridPane.setValignment(btn, VPos.CENTER);
-        btn.setMinSize(width * 0.8, height * 0.8);
-        grid.add(btn, 0, 0);
-
-        int x = 1;
-        int y = 0;
-
-        JSONArray artistAlbums = dataParser.GetAllArtistAlbums(artistId);
-
-        for (int i = 0; i < artistAlbums.length(); i ++, y += x, x = x ^ 1){
-
-            grid.getColumnConstraints().add(new ColumnConstraints(width));
-            grid.getColumnConstraints().add(new ColumnConstraints(width));
-            grid.getRowConstraints().add(new RowConstraints(height));
-
-            Button btn1 = new Button();
-            btn1.setText(artistAlbums.getJSONObject(i).getString("name"));
-            GridPane.setHalignment(btn1, HPos.CENTER);
-            GridPane.setValignment(btn1, VPos.CENTER);
-            btn1.setMinSize(width * 0.8, height * 0.8);
-
-            int finalAlbumId = i;
-            btn1.setOnAction(event -> {
-                Node albumDetails = scene.lookup("#albumDetails");
-                try {
-                    AlbumDetailsRenderer.getInstance().RenderAlbumDetails(scene,
-                            artistAlbums.getJSONObject(finalAlbumId).getInt("id"));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                NodeMover.getInstance().MoveAlongPath(albumDetails, 0, -450);
-            });
-
-            grid.add(btn1, x, y);
-        }
+        grid.addEventHandler(MouseEvent.MOUSE_DRAGGED,
+                new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        NodeMover.getInstance().SwipeDrag(mouseEvent);
+                    }
+                });
         */
-        artistDetailsAnchorPage.getChildren().add(grid);
-
-
         rendered = true;
     }
 }
