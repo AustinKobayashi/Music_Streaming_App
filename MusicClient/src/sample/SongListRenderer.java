@@ -39,7 +39,11 @@ public class SongListRenderer {
         vbox.setAlignment(Pos.CENTER);
         JSONArray allSongs = dataParser.GetAllSongs();
 
-        RenderSongList(scene, allSongs, vbox, true);
+        try {
+            RenderSongList(scene, allSongs, vbox, true);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         songListScrollPane.setContent(vbox);
 
@@ -87,12 +91,16 @@ public class SongListRenderer {
 
 
     public void RenderSongList(Scene scene, JSONArray objectArrray, VBox vBox){
-        RenderSongList(scene, objectArrray, vBox, false);
+        try {
+            RenderSongList(scene, objectArrray, vBox, false);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
 
 
-    public void RenderSongList(Scene scene, JSONArray objectArrray, VBox vBox, boolean useImage){
+    public void RenderSongList(Scene scene, JSONArray objectArrray, VBox vBox, boolean useImage) throws JSONException {
 
         queue = SongQueue.getInstance();
 
@@ -120,14 +128,10 @@ public class SongListRenderer {
                         new EventHandler<MouseEvent>() {
                             @Override
                             public void handle(MouseEvent mouseEvent) {
-                                try {
-                                    queue.ClearQueue();
-                                    queue.AddAllSongs(urlList);
-                                    queue.SetPos(finalI);
-                                    MusicPlayer.getInstance().PlaySong(scene, queue.GetCurrentSongUrl());
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
+                                queue.ClearQueue();
+                                queue.AddAllSongs(urlList);
+                                queue.SetPos(finalI);
+                                MusicPlayer.getInstance().PlaySong(scene, queue.GetCurrentSongUrl());
                             }
                         }));
             } else {
@@ -135,14 +139,10 @@ public class SongListRenderer {
                     new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent mouseEvent) {
-                            try {
-                                queue.ClearQueue();
-                                queue.AddAllSongs(urlList);
-                                queue.SetPos(finalI);
-                                MusicPlayer.getInstance().PlaySong(scene, queue.GetCurrentSongUrl());
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                            queue.ClearQueue();
+                            queue.AddAllSongs(urlList);
+                            queue.SetPos(finalI);
+                            MusicPlayer.getInstance().PlaySong(scene, queue.GetCurrentSongUrl());
                         }
                     });
             }

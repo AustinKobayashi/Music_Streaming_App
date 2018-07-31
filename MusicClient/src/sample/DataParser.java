@@ -125,6 +125,11 @@ public class DataParser {
 
 
     public String GetArtistName(int id){
-        return artists.get(id).getString("name");
+        try {
+            return artists.get(id).getString("name");
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 }

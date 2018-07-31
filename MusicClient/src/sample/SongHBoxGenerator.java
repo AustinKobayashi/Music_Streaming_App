@@ -7,13 +7,16 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
+import org.json.JSONException;
 import org.json.JSONObject;
 import javafx.scene.control.Label;
+
+import java.io.File;
 
 
 public class SongHBoxGenerator {
 
-    public static HBox GenerateSongHbox(JSONObject song, int songNumber){
+    public static HBox GenerateSongHbox(JSONObject song, int songNumber) throws JSONException {
 
         HBox hbox = new HBox();
         hbox.setAlignment(Pos.CENTER_LEFT);
@@ -38,7 +41,7 @@ public class SongHBoxGenerator {
     }
 
 
-    public static HBox GenerateSongHboxWithImage(JSONObject song){
+    public static HBox GenerateSongHboxWithImage(JSONObject song) throws JSONException {
 
         HBox hbox = new HBox();
 
@@ -49,7 +52,7 @@ public class SongHBoxGenerator {
         StackPane pane = new StackPane();
         pane.setMaxSize(Test.displayableWidth / 5, Test.displayableWidth / 5);
 
-        ImageView image = new ImageView(new Image("file:resources\\NoAlbumImageSquare.png"));
+        ImageView image = new ImageView(new Image("file:resources" + File.separator + "NoAlbumImageSquare.png"));
         image.setFitWidth(Test.displayableWidth / 5);
         image.setFitHeight(Test.displayableWidth / 5);
 

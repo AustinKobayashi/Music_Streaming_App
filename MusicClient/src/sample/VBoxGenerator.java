@@ -15,6 +15,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
 import java.awt.*;
+import java.io.File;
 
 public class VBoxGenerator {
 
@@ -35,7 +36,7 @@ public class VBoxGenerator {
         AnchorPane img = new AnchorPane();
         img.setMinSize(Test.displayableWidth * 0.8, Test.displayableHeight * 0.6);
 
-        ImageView noArtistImage = new ImageView(new Image("file:resources\\NoArtistImage.png"));
+        ImageView noArtistImage = new ImageView(new Image("file:resources" + File.separator + "NoArtistImage.png"));
 
         AnchorPane.setTopAnchor(noArtistImage, 0.0);
         AnchorPane.setLeftAnchor(noArtistImage, 0.0);
@@ -83,7 +84,7 @@ public class VBoxGenerator {
         AnchorPane img = new AnchorPane();
         img.setPrefSize(Test.displayableWidth * 0.8, 210 * 0.75);
 
-        ImageView noArtistImage = new ImageView(new Image("file:resources\\NoAlbumImageRectangle.png"));
+        ImageView noArtistImage = new ImageView(new Image("file:resources" + File.separator + "NoAlbumImageRectangle.png"));
 
         AnchorPane.setTopAnchor(noArtistImage, 0.0);
         AnchorPane.setLeftAnchor(noArtistImage, 0.0);

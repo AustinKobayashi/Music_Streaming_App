@@ -21,6 +21,8 @@ import javafx.scene.text.TextAlignment;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.io.File;
+
 /**
  * Created by Austin on 2018-07-05.
  */
@@ -42,7 +44,7 @@ public class ArtistDetailsRenderer {
         dataParser = DataParser.getInstance();
 
         ImageView artistImage = (ImageView) scene.lookup("#artistImage");
-        artistImage.setImage(new Image("file:resources\\NoArtistImageExtended.png", 450, 0, true, false));
+        artistImage.setImage(new Image("file:resources" + File.separator + "NoArtistImageExtended.png", 450, 0, true, false));
 
         Label artistNameLabel = (Label) scene.lookup("#artistNameLabel");
         artistNameLabel.setText(dataParser.GetArtistName(artistId));
